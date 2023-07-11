@@ -28,6 +28,10 @@ class BotRunner(object):
             asyncio_helper.proxy = self.proxy.url
             logger.success("Proxy Set")
 
+        @bot.message_handler(commands=["start", "help"], chat_types=['private'])
+        async def handle_command(message):
+            await Event.start(bot, message)
+
         @bot.message_handler(commands=['lock_cmd'])
         async def lock_command(message):
             if message.chat.type in ['group', 'supergroup']:

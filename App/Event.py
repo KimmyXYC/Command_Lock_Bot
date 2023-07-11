@@ -2,6 +2,19 @@ import telebot
 from loguru import logger
 
 
+async def start(bot, message):
+    _url = "https://github.com/KimmyXYC/Command_Lock_Bot.git"
+    _info = "Command Lock Bot\n" \
+            "/lock_cmd  锁定命令\n" \
+            "/unlock_cmd 解锁命令\n" \
+            "/list_locked_cmd 查看已锁定命令\n"
+    await bot.reply_to(
+        message,
+        f"{_info}开源地址: {_url}",
+        disable_web_page_preview=True,
+    )
+
+
 async def lock_command(bot, message, cmd, db):
     lock_cmd_list = db.get(str(message.chat.id))
     if lock_cmd_list is None:
